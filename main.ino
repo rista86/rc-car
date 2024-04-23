@@ -1,9 +1,9 @@
 const int pwmMotorA = D1;
-const int pwmMotorB = D2;
-const int dirMotorA = D3;
+const int dirMotorA = D2;
+const int pwmMotorB = D3;
 const int dirMotorB = D4;
 
-int motorSpeed = 500;
+int motorSpeed = 1;
 
 void setup() {
   Serial.begin(115200);
@@ -19,20 +19,26 @@ void setup() {
 }
 
 void loop() {
+  moveMotorA();
+}
+
+void moveMotorA() {
   Serial.println("Activate A");
   digitalWrite(pwmMotorA, motorSpeed);
   digitalWrite(dirMotorA, LOW);
-  delay(500);
-
-  Serial.println("Reverse A");
-  digitalWrite(dirMotorA, HIGH);
-  delay(500);
+  delay(1500);
 
   Serial.println("Stop A");
   digitalWrite(pwmMotorA, 0);
   digitalWrite(dirMotorA, LOW);
   delay(2000);
 
+  Serial.println("Reverse A");
+  digitalWrite(dirMotorA, HIGH);
+  delay(1500);
+}
+
+void moveMotorB() {
   Serial.println("Activate B");
   digitalWrite(pwmMotorB, motorSpeed);
   digitalWrite(dirMotorB, LOW);
@@ -46,4 +52,9 @@ void loop() {
   digitalWrite(pwmMotorB, 0);
   digitalWrite(dirMotorB, LOW);
   delay(2000);
+}
+
+void moveForward() {
+  digitalWrite(pwmMotorA, motorSpeed);
+  digitalWrite(dirMotorA, LOW);
 }
